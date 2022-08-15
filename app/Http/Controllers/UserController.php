@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Comment;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\StoreUserControllerRequest;
 use App\Http\Requests\UpdateUserControllerRequest;
@@ -47,6 +48,14 @@ class UserController extends Controller
             $user->password=Hash::make($request->password);
             $user->save();
             return redirect()->route('store.hien');
+
+
+    }
+    public function comment(Request $request){
+        $comment= new Comment();
+        $comment->fill($request);
+        $comment->save();
+        return redirect()->route('store.product_detail');
 
 
     }

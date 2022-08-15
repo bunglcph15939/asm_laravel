@@ -125,44 +125,35 @@
                     <span>Total</span>
                   </a>
                 </li>
+                @if (! empty(Session::get('Cart')->products))
+                @foreach (Session::get('Cart')->products as $item)
                 <li>
-                  <a href="#">Fresh Blackberry
-                    <span class="middle">x 02</span>
-                    <span class="last">$720.00</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">Fresh Tomatoes
-                    <span class="middle">x 02</span>
-                    <span class="last">$720.00</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">Fresh Brocoli
-                    <span class="middle">x 02</span>
-                    <span class="last">$720.00</span>
-                  </a>
-                </li>
+                    <a href="#">{{$item['productInfor']->name}}
+                      <span class="middle">x {{$item['quanty']}} </span>
+                      <span class="last">{{$item['price']}}</span>
+                    </a>
+                  </li>
+                @endforeach
+                @endif
+
+
               </ul>
               <ul class="list list_2">
+
+
                 <li>
-                  <a href="#">Subtotal
-                    <span>$2160.00</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">Shipping
-                    <span>Flat rate: $50.00</span>
-                  </a>
-                </li>
-                <li>
+
                   <a href="#">Total
-                    <span>$2210.00</span>
+                    @if (isset(Session::get('Cart')->totalPrice))
+                    <span>${{Session::get('Cart')->totalPrice}}</span>
+                        @else <span>$0</span>
+                        @endif
+
                   </a>
                 </li>
               </ul>
 
-             
+
               <div class="creat_account">
                 <input type="checkbox" id="f-option4" name="selector" />
                 <label for="f-option4">I’ve read and accept the </label>

@@ -17,10 +17,13 @@
 <link rel="stylesheet" href="{{asset('dist/css/slick.css')}}">
 <!-- style CSS -->
 <link rel="stylesheet" href="{{asset('dist/css/style.css')}}">
+
+
 @endsection
 
 
 @section('main-content')
+
  <!-- banner part start-->
  <section class="banner_part">
     <div class="container">
@@ -33,10 +36,21 @@
                                 <div class="banner_text">
                                     <div class="banner_text_iner">
                                         <h1>Wood & Cloth
-                                            Sofa</h1>
+                                            Sofa
+                                            @if (session()->has('alert'))
+                                           <script>
+                                            Swal.fire(
+                                                'Good job!',
+                                               'Thêm giỏ hàng thành công',
+                                                 'success'
+                                            )
+                                           </script>
+                                        @endif
+                                        </h1>
                                         <p>Incididunt ut labore et dolore magna aliqua quis ipsum
                                             suspendisse ultrices gravida. Risus commodo viverra</p>
                                         <a href="#" class="btn_2">buy now</a>
+
                                     </div>
                                 </div>
                             </div>
@@ -176,7 +190,7 @@
                                     <div class="single_product_text">
                                         <h4>{{$item->name}}</h4>
                                         <h3>{{$item->price}}</h3>
-                                        <a href="#" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
+                                        <a href="{{route('addCart',$item->id)}}" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
                                     </div>
                                 </div>
                             </div>
@@ -333,6 +347,7 @@
 @endsection
 
 @section('js')
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
  <!-- jquery plugins here-->
  <script src="{{asset('dist/js/jquery-1.12.1.min.js')}}"></script>
  <!-- popper js -->

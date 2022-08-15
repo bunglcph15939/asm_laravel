@@ -46,98 +46,53 @@
           <table class="table">
             <thead>
               <tr>
+                <th scope="col">Chức năng</th>
                 <th scope="col">Product</th>
+
                 <th scope="col">Price</th>
                 <th scope="col">Quantity</th>
                 <th scope="col">Total</th>
+
               </tr>
             </thead>
             <tbody>
+                @if (! empty(Session::get('Cart')->products))
+
+
+              @forelse (Session::get('Cart')->products as $item)
+
+
               <tr>
+                <td><a href="{{route('delete',$item['productInfor']->id)}}">Xóa</a></td>
                 <td>
                   <div class="media">
                     <div class="d-flex">
-                      <img src="{{asset('dist/img/product/single-product/cart-1.jpg')}}" alt="" />
+                      <img src="{{asset('images/product/'.$item['productInfor']->images->first()->name)}}" width="100px" alt="" />
                     </div>
                     <div class="media-body">
-                      <p>Minimalistic shop for multipurpose use</p>
+                      <p>{{$item['productInfor']->name}}</p>
                     </div>
                   </div>
                 </td>
                 <td>
-                  <h5>$360.00</h5>
+                  <h5>${{$item['productInfor']->price}}</h5>
                 </td>
                 <td>
                   <div class="product_count">
-                    <span class="input-number-decrement"> <i class="ti-angle-down"></i></span>
-                    <input class="input-number" type="text" value="1" min="0" max="10">
-                    <span class="input-number-increment"> <i class="ti-angle-up"></i></span>
+
+                    <input class="input-number" type="number" value="{{$item['quanty']}}" min="1" max="10">
+
                   </div>
                 </td>
                 <td>
-                  <h5>$720.00</h5>
+                  <h5>${{$item['price']}}</h5>
                 </td>
+
               </tr>
-              <tr>
-                <td>
-                  <div class="media">
-                    <div class="d-flex">
-                      <img src="{{asset('dist/img/product/single-product/cart-1.jpg')}}" alt="" />
-                    </div>
-                    <div class="media-body">
-                      <p>Minimalistic shop for multipurpose use</p>
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <h5>$360.00</h5>
-                </td>
-                <td>
-                  <div class="product_count">
-                    <!-- <input type="text" value="1" min="0" max="10" title="Quantity:"
-                      class="input-text qty input-number" />
-                    <button
-                      class="increase input-number-increment items-count" type="button">
-                      <i class="ti-angle-up"></i>
-                    </button>
-                    <button
-                      class="reduced input-number-decrement items-count" type="button">
-                      <i class="ti-angle-down"></i>
-                    </button> -->
-                    <span class="input-number-decrement"> <i class="ti-angle-down"></i></span>
-                    <input class="input-number" type="text" value="1" min="0" max="10">
-                    <span class="input-number-increment"> <i class="ti-angle-up"></i></span>
-                  </div>
-                </td>
-                <td>
-                  <h5>$720.00</h5>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="media">
-                    <div class="d-flex">
-                      <img src="{{asset('dist/img/product/single-product/cart-1.jpg')}}" alt="" />
-                    </div>
-                    <div class="media-body">
-                      <p>Minimalistic shop for multipurpose use</p>
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <h5>$360.00</h5>
-                </td>
-                <td>
-                  <div class="product_count">
-                    <span class="input-number-decrement"> <i class="ti-angle-down"></i></span>
-                    <input class="input-number" type="text" value="1" min="0" max="10">
-                    <span class="input-number-increment"> <i class="ti-angle-up"></i></span>
-                  </div>
-                </td>
-                <td>
-                  <h5>$720.00</h5>
-                </td>
-              </tr>
+              @empty
+              <b>Không có đơn hàng nào</b>
+        @endforelse
+        @endif
               <tr class="bottom_button">
                 <td>
                   <a class="btn_1" href="#">Update Cart</a>
@@ -157,9 +112,17 @@
                   <h5>Subtotal</h5>
                 </td>
                 <td>
-                  <h5>$2160.00</h5>
+
+                        @if (isset(Session::get('Cart')->totalPrice))
+                        <h5>${{Session::get('Cart')->totalPrice}}</h5>
+                        @else <h5>$0</h5>
+                        @endif
+
+
+
                 </td>
               </tr>
+
 
             </tbody>
           </table>

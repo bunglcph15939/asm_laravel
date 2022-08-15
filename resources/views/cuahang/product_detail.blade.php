@@ -192,35 +192,62 @@
           </div>
         </div>
         <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-          <div class="row">
-            <div class="col-lg-6">
-              <div class="comment_list">
-
-                <div class="review_item">
-                  <div class="media">
-                    <div class="d-flex">
-                      <img src="{{asset('dist/img/product/single-product/review-1.png')}}" alt="" />
+            <div class="row">
+              <div class="col-lg-6">
+                <div class="comment_list">
+                  <div class="review_item">
+                    <div class="media">
+                      <div class="d-flex">
+                        <img src="img/product/single-product/review-1.png" alt="" />
+                      </div>
+                      <div class="media-body">
+                        <h4>Blake Ruiz</h4>
+                        <h5>12th Feb, 2017 at 05:56 pm</h5>
+                        <a class="reply_btn" href="#">Reply</a>
+                      </div>
                     </div>
-                    <div class="media-body">
-                      <h4>Blake Ruiz</h4>
-                      <h5>12th Feb, 2017 at 05:56 pm</h5>
-                      <a class="reply_btn" href="#">Reply</a>
-                    </div>
+                    <p>
+                      Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                      sed do eiusmod tempor incididunt ut labore et dolore magna
+                      aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                      ullamco laboris nisi ut aliquip ex ea commodo
+                    </p>
                   </div>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                    sed do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                    ullamco laboris nisi ut aliquip ex ea commodo
-                  </p>
+
+
                 </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="review_box">
+                  <h4>Post a comment</h4>
+                  <form class="row contact_form" action="{{route('store.comment')}}" method="post" >
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <input type="hidden" class="form-control" id="name" name="product_id"  />
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <input type="hidden" class="form-control" id="email" name="user_id" placeholder="Email Address" />
+                      </div>
+                    </div>
 
-
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <textarea class="form-control" name="message" id="message" rows="1"
+                          placeholder="Message"></textarea>
+                      </div>
+                    </div>
+                    <div class="col-md-12 text-right">
+                      <button  class="btn_3">
+                        Submit Now
+                      </button>
+                    </div>
+                  </form>
+                </div>
               </div>
             </div>
-
           </div>
-        </div>
 
       </div>
     </div>

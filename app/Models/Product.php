@@ -3,6 +3,7 @@
 namespace App\Models;
 use App\Models\Image;
 use App\Models\Category;
+use App\Models\Comment;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -31,5 +32,8 @@ class Product extends Model
 
     public function category(){
         return $this->belongsTo(Category::class);
+    }
+    public function Comments(){
+        return $this->hasMany(Comments::class);
     }
 }

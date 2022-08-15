@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ImageController;
+use App\Http\Controllers\CartController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -42,6 +43,7 @@ Route::prefix('/store')->name('store.')->group(function(){
 
     Route::get('/product_detail/{id?}',[ProductController::class,'detail'])->name('product_detail');
     Route::get('/danh_muc/{id}',[CategoryController::class,'hien'])->name('hien_danhmuc');
+    Route::post('comment',[UserController::class,'comment'])->name('comment');
 
 });
 Route::middleware('guest')->prefix('/dangnhap')->name('dangnhap.')->group(function(){
@@ -51,6 +53,7 @@ Route::middleware('guest')->prefix('/dangnhap')->name('dangnhap.')->group(functi
     Route::get('/register',[LoginController::class,'register'])->name('register');
     Route::post('/register',[UserController::class,'create'])->name('register');
 });
+
 Route::middleware('auth')->prefix('/admin')->name('admin.')->group(function(){
     // Route::get('/',[LoginController::class,'index'])->name('index');
     Route::get('/', function () {
@@ -86,10 +89,15 @@ Route::middleware('auth')->prefix('/admin')->name('admin.')->group(function(){
 Route::prefix('/user')->name('user.')->group(function(){
     Route::get('/',[UserController::class,'index'])->name('index');
     Route::put('sua_quyen/{user}',[UserController::class,'sua_quyen'])->name('sua_quyen');
+
 });
 
 
 
 });
 Route::middleware('auth')->get('/auth/logout',[LoginController::class,'logout'])->name('logout');
+Route::get('showCart',[CartController::class,'index'])->name('showCart');
+Route::get('addCart/{id}',[CartController::class,'AddCart'])->name('addCart');
+Route::get('delete/{id}',[CartController::class,'DeleteCart'])->name('delete');
+
 

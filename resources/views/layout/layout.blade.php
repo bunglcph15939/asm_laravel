@@ -18,7 +18,7 @@
   @yield('main-content')
 
   @include('layout.footer')
- 
+
 @yield('js')
 
 </body>
