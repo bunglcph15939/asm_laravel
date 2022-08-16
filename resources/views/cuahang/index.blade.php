@@ -46,6 +46,15 @@
                                             )
                                            </script>
                                         @endif
+                                        @if (session()->has('tb'))
+                                        <script>
+                                         Swal.fire(
+                                             'Good job!',
+                                            'Mua thành công',
+                                              'success'
+                                         )
+                                        </script>
+                                     @endif
                                         </h1>
                                         <p>Incididunt ut labore et dolore magna aliqua quis ipsum
                                             suspendisse ultrices gravida. Risus commodo viverra</p>

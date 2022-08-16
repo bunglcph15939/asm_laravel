@@ -28,15 +28,15 @@ class LoginRequest extends FormRequest
             'password'=>'required|min:5'
         ];
     }
-    public function messages()
-    {
-        return [
-            'email.required'=>'Email người dùng bắt buộc nhập',
-            'email.email'=>'Email nười dùng phải đúng định dạng ',
-            'password.required'=>'Password người dùng phải nhập ',
+    // public function messages()
+    // {
+    //     return [
+    //         'email.required'=>'Email người dùng bắt buộc nhập',
+    //         'email.email'=>'Email nười dùng phải đúng định dạng ',
+    //         'password.required'=>'Password người dùng phải nhập ',
 
-        ];
+    //     ];
 
 
-    }
+    // }
 }

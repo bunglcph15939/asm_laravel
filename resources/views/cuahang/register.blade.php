@@ -113,7 +113,7 @@
                                 </div>
                                 <div class="col-md-12 form-group ">
                                     <label for="status">Phân quyền</label> </br>
-                                    <input type="radio"  id="role" name="role" value="1" checked> Học sinh
+                                    <input type="radio"  id="role" name="role" value="1" checked> Giáo viên
                                     <input type="radio"  id="role" name="role" value="0"> Sinh viên
 
 

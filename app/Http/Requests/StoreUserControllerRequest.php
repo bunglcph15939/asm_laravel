@@ -32,33 +32,33 @@ class StoreUserControllerRequest extends FormRequest
             'phone' => 'required|min:10|numeric',
         ];
     }
-    public function messages()
-    {
-        return [
-            'name.required'=>'Tên người dùng bắt buộc nhập ',
-            'name.min'=>'Độ dài tên người dùng',
-            'name.max'=>'Độ dài tên người dùng tối đa 50 kí tự',
-            'email.required'=>'Email ngườ dùng bắt buộc nhập',
-            'email.email'=>'Email nười dùng phải đúng định dạng ',
-            'code.required'=>'Không được để trống code',
-            'code.min'=>'Code Tối thiểu 6 kí tự ',
-            'code.max'=>'Code Tối đa 50 kí tự',
-            'username.required'=>'username Không được để trống',
-            'username.min'=>'Username Tối thiểu 6 kí tự',
-            'username.max'=>'Username tối đa 50 kí tự',
-            'password.required'=>'Password không được để trống',
-            'password.min'=>'Pass tối thiểu 6 kí tự',
-            'password.max'=>'Pass tối đa 50 kí tự',
+    // public function messages()
+    // {
+    //     return [
+    //         'name.required'=>'Tên người dùng bắt buộc nhập ',
+    //         'name.min'=>'Độ dài tên người dùng',
+    //         'name.max'=>'Độ dài tên người dùng tối đa 50 kí tự',
+    //         'email.required'=>'Email ngườ dùng bắt buộc nhập',
+    //         'email.email'=>'Email nười dùng phải đúng định dạng ',
+    //         'code.required'=>'Không được để trống code',
+    //         'code.min'=>'Code Tối thiểu 6 kí tự ',
+    //         'code.max'=>'Code Tối đa 50 kí tự',
+    //         'username.required'=>'username Không được để trống',
+    //         'username.min'=>'Username Tối thiểu 6 kí tự',
+    //         'username.max'=>'Username tối đa 50 kí tự',
+    //         'password.required'=>'Password không được để trống',
+    //         'password.min'=>'Pass tối thiểu 6 kí tự',
+    //         'password.max'=>'Pass tối đa 50 kí tự',
 
-            'address.required'=>'address không được để trống',
-            'address.min'=>'Pass tối thiểu 6 kí tự',
-            'address.max'=>'Pass tối đa 50 kí tự',
+    //         'address.required'=>'address không được để trống',
+    //         'address.min'=>'Pass tối thiểu 6 kí tự',
+    //         'address.max'=>'Pass tối đa 50 kí tự',
 
-            'Phone.required'=>'Phone không được để trống',
-            'address.numeric'=>'Phải là số',
+    //         'Phone.required'=>'Phone không được để trống',
+    //         'address.numeric'=>'Phải là số',
 
 
 
-        ];
-    }
+    //     ];
+    // }
 }

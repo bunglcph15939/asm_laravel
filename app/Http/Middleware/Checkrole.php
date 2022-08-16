@@ -17,6 +17,7 @@ class Checkrole
     public function handle(Request $request, Closure $next)
     {
         if(Auth::user()->role==0){
+
             return redirect()->route('store.hien');
         }
         return $next($request);

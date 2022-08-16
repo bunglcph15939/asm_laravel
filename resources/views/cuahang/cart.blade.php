@@ -93,18 +93,7 @@
               <b>Không có đơn hàng nào</b>
         @endforelse
         @endif
-              <tr class="bottom_button">
-                <td>
-                  <a class="btn_1" href="#">Update Cart</a>
-                </td>
-                <td></td>
-                <td></td>
-                <td>
-                  <div class="cupon_text float-right">
-                    <a class="btn_1" href="#">Close Coupon</a>
-                  </div>
-                </td>
-              </tr>
+             
               <tr>
                 <td></td>
                 <td></td>

@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 //use App\Models\Cart;
-
+use illuminate\Support\Facades\Auth;
 use App\Cart;
+use App\Models\order;
+use App\Models\Cart_detail;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -49,9 +51,6 @@ class CartController extends Controller
     }
 
     public function DeleteCart(Request $request,$id){
-
-
-
                 $cart=Session('Cart') ? Session('Cart') :null ;
                 $newCart= new Cart($cart);
                 $newCart->deleteItem($id);
@@ -64,8 +63,35 @@ class CartController extends Controller
                 return redirect()->back()->with('alert','xin chào');
         }
 
-        public function checkout(){
-            
+        public function checkout(Request $request){
+            $validated = $request->validate([
+                'name' => 'required|max:255|min:5',
+                'phone' => 'required|max:10|min:10',
+                'address' => 'required|max:255|min:5',
+            ]);
+            $order= new order();
+             $order->name=$request->name;
+             $order->phone=$request->phone;
+             $order->address=$request->address;
+            $order->total=Session::get('Cart')->totalPrice;
+            $order->quantity=Session::get('Cart')->totalQuanty;
+            $order->status=0;
+               $order->save();
+            $id_order=order::select('*')
+            ->max('id');
+           foreach(Session::get('Cart')->products as $item ) {
+            $order_detail=new Cart_detail();
+
+            $order_detail->name=$item['productInfor']->name;
+            $order_detail->quantity=$item['quanty'];
+            $order_detail->total=$item['price'];
+            $order_detail->id_order=$id_order;
+            $order_detail->save();
+           }
+           return redirect()->route('store.hien')->with('tb','thành công');
+
+
+
         }
 
 
@@ -93,7 +119,7 @@ class CartController extends Controller
      */
     public function show(Cart $cart)
     {
-        //
+
     }
 
     /**

@@ -33,13 +33,17 @@
                                     pages
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
-                                  
+
                                     <a class="dropdown-item" href="{{route('dangnhap.getlogin')}}"> login</a>
                                     <a class="dropdown-item" href="tracking.html">tracking</a>
                                     <a class="dropdown-item" href="{{route('store.checkout')}}">product checkout</a>
                                     <a class="dropdown-item" href="cart.html">shopping cart</a>
                                     <a class="dropdown-item" href="confirmation.html">confirmation</a>
                                     <a class="dropdown-item" href="elements.html">elements</a>
+                                    @if (Auth::user())
+                                    <a class="dropdown-item" href="{{route('logout')}}">Đăng xuất</a>
+                                    @endif
+
                                 </div>
                             </li>
                             <li class="nav-item dropdown">

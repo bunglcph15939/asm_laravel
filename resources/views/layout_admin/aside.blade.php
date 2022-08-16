@@ -76,6 +76,12 @@
                   <p>Quản lý user</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="{{route('admin.order.index')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Quản lý đơn hàng</p>
+                </a>
+              </li>
             </ul>
           </li>
 
