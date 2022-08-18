@@ -49,6 +49,15 @@ class CartController extends Controller
 
         return redirect()->back()->with('alert','xin chào');
     }
+    public function save_edit(Request $request,$id ){
+        $cart=Session('Cart') ? Session('Cart') :null ;
+        $newCart= new Cart($cart);
+        $newCart->save_edit($id,$request->number);
+
+            $request->Session()->put('Cart',$newCart);
+
+        return redirect()->back()->with('alert','xin chào');
+    }
 
     public function DeleteCart(Request $request,$id){
                 $cart=Session('Cart') ? Session('Cart') :null ;
@@ -60,7 +69,7 @@ class CartController extends Controller
                 else{
                     $request->Session()->forget('Cart');
                 }
-                return redirect()->back()->with('alert','xin chào');
+                return redirect()->back()->with('alert','Thành công');
         }
 
         public function checkout(Request $request){

@@ -57,7 +57,7 @@
                             <form class="row contact_form" action="{{route('dangnhap.register')}}" method="post" novalidate="novalidate" enctype="multipart/form-data">
                                 @csrf
                                 <div class="col-md-12 form-group p_star">
-                                    <input type="text" class="form-control  @error('name') is-invalid  @enderror" id="name" name="name" value=""
+                                    <input type="text" class="form-control  @error('name') is-invalid  @enderror" id="name" name="name" value="{{old('name')}}"
                                         placeholder="Name">
                                         @error('name')
                                         <span class="text-danger">{{ $message}}</span>
@@ -65,14 +65,14 @@
                                 </div>
 
                                 <div class="col-md-12 form-group p_star">
-                                    <input type="text" class="form-control @error('username') is-invalid @enderror" id="name  " name="username" value=""
+                                    <input type="text" class="form-control @error('username') is-invalid @enderror" id="name  " name="username" value="{{old('username')}}"
                                         placeholder="Nhập Username">
                                         @error('username')
                                         <span class="text-danger">{{ $message}}</span>
                                     @enderror
                                 </div>
                                 <div class="col-md-12 form-group p_star">
-                                    <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value=""
+                                    <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{old('email')}}"
                                         placeholder="Email">
                                         @error('email')
                                         <span class="text-danger">{{ $message}}</span>
@@ -92,32 +92,21 @@
                                 </div>
 
                                 <div class="col-md-12 form-group p_star">
-                                    <input type="text" class="form-control @error('address') is-invalid @enderror" id="code" name="address" value=""
+                                    <input type="text" class="form-control @error('address') is-invalid @enderror" id="code" name="address" value="{{old('address')}}"
                                         placeholder="address">
                                         @error('address')
                                         <span class="text-danger">{{ $message}}</span>
                                     @enderror
                                 </div>
                                 <div class="col-md-12 form-group p_star">
-                                    <input type="text" class="form-control @error('phone') is-invalid @enderror" id="code" name="phone" value=""
+                                    <input type="text" class="form-control @error('phone') is-invalid @enderror" id="code" name="phone" value="{{old('code')}}"
                                         placeholder="phone">
                                         @error('phone')
                                         <span class="text-danger">{{ $message}}</span>
                                     @enderror
                                 </div>
-                                <div class="col-md-12 form-group ">
-                                    <label for="role">Trạng Thái</label> </br>
-                                    <input type="radio"  id="status" name="status" value="1" checked> Hiện
-                                    <input type="radio"  id="status" name="status" value="0"> Ẩn
-
-                                </div>
-                                <div class="col-md-12 form-group ">
-                                    <label for="status">Phân quyền</label> </br>
-                                    <input type="radio"  id="role" name="role" value="1" checked> Giáo viên
-                                    <input type="radio"  id="role" name="role" value="0"> Sinh viên
 
 
-                                </div>
 
                                     <button type="submit" value="submit" class="btn_3 ">
                                         log in

@@ -25,6 +25,7 @@
  @section('main-content')
 
 
+
  <!-- breadcrumb start-->
  <section class="breadcrumb breadcrumb_bg">
     <div class="container">
@@ -48,7 +49,16 @@
         <div class="row">
             <div class="col-lg-3">
                 <div class="left_sidebar_area">
+                    @if (session()->has('alert'))
 
+                    <script>
+                     Swal.fire(
+                         'Good job!',
+                        'Thêm giỏ hàng thành công',
+                          'success'
+                     )
+                    </script>
+                    @endif
 
                     <aside class="left_widgets p_filter_widgets">
                         <div class="l_w_title">
@@ -74,13 +84,13 @@
                         <div class="widgets_inner">
                             <ul class="list">
                                 <li>
-                                    <a href="#">Small</a>
+                                    <a href="{{route('store.loc_size',1)}}">Small</a>
                                 </li>
                                 <li>
-                                    <a href="#">Medium</a>
+                                    <a href="{{route('store.loc_size',2)}}">Medium</a>
                                 </li>
                                 <li class="active">
-                                    <a href="#">Large</a>
+                                    <a href="{{route('store.loc_size',3)}}">Large</a>
                                 </li>
 
                             </ul>
@@ -99,10 +109,12 @@
                                     <div class="price_text">
                                         <p>Price :</p>
                                     </div>
+                                    <form action="" method="post">
                                     <div class="price_value d-flex justify-content-center">
-                                        <input type="text" class="js-input-from" id="amount" readonly />
+                                        <input type="text" class="js-input-from" id="amount" name='amount' readonly />
                                         <span>to</span>
-                                        <input type="text" class="js-input-to" id="amount" readonly />
+                                        <input type="text" class="js-input-to" id="amount" name='amount'  readonly />
+                                    </form>
                                     </div>
                                 </div>
                             </div>
@@ -134,8 +146,8 @@
                 </div>
 
                 <div class="row align-items-center latest_product_inner">
-                        @if (isset($abc))
-                        @foreach ($abc as $item)
+                        @if (isset($loc_danhmuc))
+                        @foreach ($loc_danhmuc as $item)
                     <a href="{{route('store.product_detail',$item->id)}}">
                     <div class="col-lg-4 col-sm-6">
                         <div class="single_product_item">
@@ -143,13 +155,15 @@
                             <div class="single_product_text">
                                 <h4>{{$item->name}}</h4>
                                 <h3>{{$item->price}}</h3>
-                                <a href="#" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
+                                <a href="{{route('addCart',$item->id)}}" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
                             </div>
                         </div>
                     </div>
                     </a>
                     @endforeach
-                    @else
+                    @endif
+
+                    @if(!empty($product))
                     @foreach ($product as $item)
                     <a href="{{route('store.product_detail',$item->id)}}">
                     <div class="col-lg-4 col-sm-6">
@@ -158,13 +172,29 @@
                             <div class="single_product_text">
                                 <h4>{{$item->name}}</h4>
                                 <h3>{{$item->price}}</h3>
-                                <a href="#" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
+                                <a href="{{route('addCart',$item->id)}}" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
                             </div>
                         </div>
                     </div>
                     </a>
                     @endforeach
+                    @endif
 
+                        @if(isset($loc_size))
+                        @foreach ($loc_size as $item)
+                        <a href="{{route('store.product_detail',$item->id)}}">
+                        <div class="col-lg-4 col-sm-6">
+                            <div class="single_product_item">
+                                <img src="{{asset('images/product/'.$item->thumbnail->name)}}"  with='100px'alt="">
+                                <div class="single_product_text">
+                                    <h4>{{$item->name}}</h4>
+                                    <h3>{{$item->price}}</h3>
+                                    <a href="{{route('addCart',$item->id)}}" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        </a>
+                        @endforeach
 
                         @endif
 
@@ -212,7 +242,7 @@
                     </a>
                     @endforeach
 
-                    @else
+                    @elseif(isset($product))
                     @foreach ($product as $item)
                     <a href="{{route('store.product_detail',$item->id)}}">
                     <div class="single_product_item">
@@ -237,6 +267,7 @@
 @endsection
 
 @section('js')
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
  <!-- jquery plugins here-->
  <script src="{{asset('dist/js/jquery-1.12.1.min.js')}}"></script>
  <!-- popper js -->

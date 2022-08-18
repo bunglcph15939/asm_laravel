@@ -63,7 +63,11 @@
 
 
               <tr>
-                <td><a href="{{route('delete',$item['productInfor']->id)}}">Xóa</a></td>
+                <td><a class="btn btn-danger" href="{{route('delete',$item['productInfor']->id)}}">Xóa</a>
+                    <form action="{{route('save_edit',$item['productInfor']->id)}}" method="get">
+                        @csrf
+                    <button class="btn btn-success">Lưu sửa</button>
+                </td>
                 <td>
                   <div class="media">
                     <div class="d-flex">
@@ -80,10 +84,11 @@
                 <td>
                   <div class="product_count">
 
-                    <input class="input-number" type="number" value="{{$item['quanty']}}" min="1" max="10">
+                    <input class="input-number" name="number" type="number" value="{{$item['quanty']}}" min="1" max="10">
 
                   </div>
                 </td>
+            </form>
                 <td>
                   <h5>${{$item['price']}}</h5>
                 </td>
@@ -93,7 +98,7 @@
               <b>Không có đơn hàng nào</b>
         @endforelse
         @endif
-             
+
               <tr>
                 <td></td>
                 <td></td>

@@ -17,7 +17,7 @@ class ImageController extends Controller
     {
         $image=Image::select('id','name','id_product')
         ->with('product')
-        ->paginate(10);
+        ->get();
         return view('admin.admin_image',[
             'image'=>$image
         ]);
@@ -45,8 +45,9 @@ class ImageController extends Controller
     public function store(Request $request)
     {
 
+
         $validated = $request->validate([
-            'name' => ['required','mimes:jpg,png','max:2048'],
+            'name' => ['required','mimes:jpg,png','max:5000'],
         ]);
         $image = new Image();
         if($request->hasFile('name')){
@@ -59,7 +60,7 @@ class ImageController extends Controller
         $image->id_product=$request->id_product;
 
         $image->save();
-        return redirect()->route('admin.image.index');
+        return redirect()->back();
 
 
     }
@@ -113,7 +114,7 @@ class ImageController extends Controller
 
 
         $image->update($data);
-        return redirect()->route('admin.image.index');
+        return redirect()->back();
 
 
     }

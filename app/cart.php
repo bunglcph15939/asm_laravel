@@ -26,6 +26,7 @@
         $newProduct['quanty'] ++;
         $newProduct['price']=$newProduct['quanty']*$product->price;
         $this->products[$id]=$newProduct;
+
         $this->totalPrice +=  $product->price;
         $this->totalQuanty++ ;
     }
@@ -33,6 +34,16 @@
         $this->totalQuanty-= $this->products[$id]['quanty'];
         $this->totalPrice-= $this->products[$id]['price'];
         unset($this->products[$id]);
+
+    }
+    public function save_edit($id,$quanty){
+        $this->totalQuanty-=$this->products[$id]['quanty'];
+        $this->totalPrice-=$this->products[$id]['price'];
+        $this->products[$id]['quanty']=$quanty;
+        $this->products[$id]['price']=$quanty*$this->products[$id]['productInfor']->price;
+
+        $this->totalQuanty+=$this->products[$id]['quanty'];
+        $this->totalPrice+=$this->products[$id]['price'];
 
     }
  }

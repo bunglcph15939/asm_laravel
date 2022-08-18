@@ -7,7 +7,7 @@ use App\Models\Comment;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\StoreUserControllerRequest;
 use App\Http\Requests\UpdateUserControllerRequest;
-
+use illuminate\Support\Facades\Auth;
 class UserController extends Controller
 {
     /**
@@ -17,7 +17,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        $user=User::select('id','name','username','email','avatar','role')->get();
+        $user=User::select('id','name','username','email','avatar','role','status')
+        ->where('id','!=',Auth::user()->id)
+        ->get();
         return view('admin.admin_user',[
             'user'=>$user
         ]);
@@ -44,7 +46,8 @@ class UserController extends Controller
             else{
                 $user->avatar='images/users/macdinh.webp';
             }
-
+            $user->status=0;
+            $user->role=0;
             $user->password=Hash::make($request->password);
             $user->save();
             return redirect()->route('store.hien');
@@ -68,6 +71,18 @@ class UserController extends Controller
          }
          $user->update([
              'role'=>$user['role']
+         ]);
+         return redirect()->route('admin.user.index');
+
+    }
+    public function fix_status(User $user){
+        if($user['status']==0){
+            $user['status']=1;
+         }else{
+            $user['status']=0;
+         }
+         $user->update([
+             'status'=>$user['status']
          ]);
          return redirect()->route('admin.user.index');
 

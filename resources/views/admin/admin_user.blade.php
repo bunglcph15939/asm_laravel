@@ -9,7 +9,7 @@
             <th>Tên</th>
             <th>MÃ tài khoản</th>
             <th>Email</th>
-
+            <th>Trạng thái</th>
             <th>ảnh</th>
             <th>Quyền</th>
             <th>Action</th>
@@ -22,12 +22,17 @@
             <td>{{$item->name}}</td>
             <td>{{$item->username}}</td>
             <td>{{$item->email}}</td>
-            {{-- <td>
-                <ul>@foreach ($item->posts as $item2)
-                    <li>{{$item2->classroom->name}}</li>
+            <td>
+                <form action="{{route('admin.user.fix_status',$item->id)}}" method="post">
+                    @method('PUT')
+                    @csrf
+                    @if ($item->status==1) <button class="btn btn-danger">Hủy kích hoạt</button>
+                        @else <button class="btn btn-success">kích hoạt</button>
+                    @endif
 
-                @endforeach</ul>
-            </td> --}}
+
+            </form>
+            </td>
 
             <td><img src="{{ asset($item->avatar)}}" width="50px" alt=""></td>
             <td>{{$item->role==0 ?'Giáo viên' :'Sinh viên'}}</td>

@@ -8,6 +8,8 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\TrackingController;
+use App\Http\Controllers\CommentController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -37,7 +39,13 @@ Route::prefix('/store')->name('store.')->group(function(){
     })->name('contact');
     Route::get('/product_detail/{id?}',[ProductController::class,'detail'])->name('product_detail');
     Route::get('/danh_muc/{id}',[CategoryController::class,'hien'])->name('hien_danhmuc');
-    Route::post('comment',[UserController::class,'comment'])->name('comment');
+    Route::get('/loc_size/{size}',[ProductController::class,'loc_size'])->name('loc_size');
+    Route::post('/comment/{id}',[CommentController::class,'comment'])->name('comment');
+
+  Route::prefix('/tracking')->name('tracking.')->group(function(){
+        Route::get('/',[TrackingController::class,'index'])->name('index');
+        Route::get('/check',[TrackingController::class,'check'])->name('check');
+    });
 });
 Route::middleware('guest')->prefix('/dangnhap')->name('dangnhap.')->group(function(){
     Route::get('/getlogin',[LoginController::class,'index'])->name('getlogin');
@@ -76,6 +84,7 @@ Route::middleware(['auth','checkrole'])->prefix('/admin')->name('admin.')->group
 Route::prefix('/user')->name('user.')->group(function(){
     Route::get('/',[UserController::class,'index'])->name('index');
     Route::put('sua_quyen/{user}',[UserController::class,'sua_quyen'])->name('sua_quyen');
+    Route::put('fix_status/{user}',[UserController::class,'fix_status'])->name('fix_status');
 });
 Route::prefix('/order')->name('order.')->group(function(){
     Route::get('/',[OrderController::class,'index'])->name('index');
@@ -89,6 +98,7 @@ Route::prefix('/order')->name('order.')->group(function(){
     Route::get('showCart',[CartController::class,'index'])->name('showCart');
     Route::get('addCart/{id}',[CartController::class,'AddCart'])->name('addCart');
     Route::get('delete/{id}',[CartController::class,'DeleteCart'])->name('delete');
+    Route::get('save_edit/{id}',[CartController::class,'save_edit'])->name('save_edit');
     Route::post('checkout',[CartController::class,'checkout'])->name('checkout');
 
 

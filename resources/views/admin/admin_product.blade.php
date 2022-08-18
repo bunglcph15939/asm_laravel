@@ -9,6 +9,7 @@
                 <th>ID</th>
                 <th>Name</th>
                 <th>Price</th>
+                <th>image</th>
                 <th>Description</th>
                 <th>Color</th>
                 <th>Size</th>
@@ -24,6 +25,7 @@
                 <td scope="row">{{$item->id}}</td>
                 <td>{{$item->name}}</td>
                 <td>{{$item->price}}</td>
+                <td><img src="{{asset('images/product/'.$item->thumbnail->name)}}" width='100px' alt=""></td>
                 <td>{{$item->description}}</td>
                 <td>{{$item->color}}</td>
                 <td>{{$item->size}}</td>

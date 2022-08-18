@@ -43,7 +43,7 @@
         <div class="col-lg-7 col-xl-7">
           <div class="product_slider_img">
             <div id="vertical">
-                @foreach ($image as $item)
+                @foreach ($product->images as $item)
                 <div data-thumb="{{asset('images/product/'.$item->name)}}">
                     <img src="{{asset('images/product/'.$item->name)}}" />
                   </div>
@@ -53,18 +53,18 @@
             </div>
           </div>
         </div>
-        @foreach ($product as $item)
+
         <div class="col-lg-5 col-xl-4">
           <div class="s_product_text">
 
-            <h3>{{$item->name}}</h3>
+            <h3>{{$product->name}}</h3>
 
 
-            <h2>{{$item->price}}</h2>
+            <h2>{{$product->price}}</h2>
             <ul class="list">
               <li>
                 <a class="active" href="#">
-                  <span>Category</span> :{{$item->category->name}}</a>
+                  <span>Category</span> :{{$product->category->name}}</a>
               </li>
               <li>
                 <a href="#"> <span>Availibility</span> : In Stock</a>
@@ -72,16 +72,16 @@
             </ul>
 
             <p>
-              {{$item->description}}
+              {{$product->description}}
             </p>
             <div class="card_area d-flex justify-content-between align-items-center">
 
-              <a href="{{route('addCart',$item->id)}}" class="btn_3">add to cart</a>
+              <a href="{{route('addCart',$product->id)}}" class="btn_3">add to cart</a>
               <a href="#" class="like_us"> <i class="ti-heart"></i> </a>
             </div>
           </div>
         </div>
-        @endforeach
+
       </div>
     </div>
   </div>
@@ -103,16 +103,13 @@
           <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact"
             aria-selected="false">Comments</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link active" id="review-tab" data-toggle="tab" href="#review" role="tab" aria-controls="review"
-            aria-selected="false">Reviews</a>
-        </li>
+
       </ul>
       <div class="tab-content" id="myTabContent">
         <div class="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab">
-          @foreach ($product as $item)
-            <p>{{$item->description}}</p>
-          @endforeach
+
+            <p>{{$product->description}}</p>
+
 
         </div>
         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
@@ -189,7 +186,11 @@
         </div>
         <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
             <div class="row">
+
+
+
               <div class="col-lg-6">
+                @foreach ($product->comments as $item)
                 <div class="comment_list">
                   <div class="review_item">
                     <div class="media">
@@ -197,40 +198,30 @@
                         <img src="img/product/single-product/review-1.png" alt="" />
                       </div>
                       <div class="media-body">
-                        <h4>Blake Ruiz</h4>
-                        <h5>12th Feb, 2017 at 05:56 pm</h5>
+                        <h4>{{$item->user->name}}</h4>
+                        <h5>{{$item->created_at}}</h5>
                         <a class="reply_btn" href="#">Reply</a>
                       </div>
                     </div>
                     <p>
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                      sed do eiusmod tempor incididunt ut labore et dolore magna
-                      aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                      ullamco laboris nisi ut aliquip ex ea commodo
+                        {{$item->content}}
                     </p>
                   </div>
 
 
                 </div>
+                @endforeach
               </div>
+
               <div class="col-lg-6">
                 <div class="review_box">
                   <h4>Post a comment</h4>
-                  <form class="row contact_form" action="{{route('store.comment')}}" method="post" >
+                  @if ( Auth::check())
+                  <form class="row contact_form" action="{{route('store.comment',$product->id)}}" method="post" >
+                    @csrf
                     <div class="col-md-12">
                       <div class="form-group">
-                        <input type="hidden" class="form-control" id="name" name="product_id"  />
-                      </div>
-                    </div>
-                    <div class="col-md-12">
-                      <div class="form-group">
-                        <input type="hidden" class="form-control" id="email" name="user_id" placeholder="Email Address" />
-                      </div>
-                    </div>
-
-                    <div class="col-md-12">
-                      <div class="form-group">
-                        <textarea class="form-control" name="message" id="message" rows="1"
+                        <textarea class="form-control" name="content" id="content" rows="1"
                           placeholder="Message"></textarea>
                       </div>
                     </div>
@@ -240,6 +231,10 @@
                       </button>
                     </div>
                   </form>
+                    @else
+                    <span class="text-danger"><a href="{{route('dangnhap.getlogin')}}"> Bạn cần đăng nhập để bình luận</a></span>
+                  @endif
+
                 </div>
               </div>
             </div>

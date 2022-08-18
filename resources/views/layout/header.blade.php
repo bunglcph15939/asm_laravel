@@ -35,7 +35,7 @@
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
 
                                     <a class="dropdown-item" href="{{route('dangnhap.getlogin')}}"> login</a>
-                                    <a class="dropdown-item" href="tracking.html">tracking</a>
+                                    <a class="dropdown-item" href="{{route('store.tracking.index')}}">tracking</a>
                                     <a class="dropdown-item" href="{{route('store.checkout')}}">product checkout</a>
                                     <a class="dropdown-item" href="cart.html">shopping cart</a>
                                     <a class="dropdown-item" href="confirmation.html">confirmation</a>
@@ -82,14 +82,6 @@
             </div>
         </div>
     </div>
-    <div class="search_input" id="search_input_box">
-        <div class="container ">
-            <form class="d-flex justify-content-between search-inner">
-                <input type="text" class="form-control" id="search_input" placeholder="Search Here">
-                <button type="submit" class="btn"></button>
-                <span class="ti-close" id="close_search" title="Close Search"></span>
-            </form>
-        </div>
-    </div>
+
 </header>
 

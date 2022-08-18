@@ -111,14 +111,14 @@ class CategoryController extends Controller
     }
     public function hien($id,Category $category){
 
-            $abc=Product::select('id','name','price','description','color','size','category_id')
+            $loc_danhmuc=Product::select('id','name','price','description','color','size','category_id')
             ->where('category_id','=',$id)
             ->with('category')
             ->get();
             $category=Category::select('id','name')
             ->get();
             return view('cuahang.category',[
-                'abc'=>$abc,
+                'loc_danhmuc'=>$loc_danhmuc,
                 'category'=>$category
             ]);
 

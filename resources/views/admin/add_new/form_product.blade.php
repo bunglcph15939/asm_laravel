@@ -1,7 +1,7 @@
 @extends('layout_admin.main')
 @section('content-title','Chỉnh sửa sản phẩm')
 @section('content')
-<form action="{{ Route('admin.create_product',isset($product)? $product->id:'') }}" method="POST" >
+<form action="{{ Route('admin.create_product',isset($product)? $product->id:'') }}" method="POST" enctype="multipart/form-data">
     @csrf
     @if (isset($product))
     @method('PUT')
@@ -42,6 +42,14 @@
     <div class="form-group">
         <label for="exampleInputEmail1">Description</label>
         <textarea name="description" id="editor" class="form-control" value="">{{isset($product)? $product->price : old('description')}}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="">Ảnh</label>
+        <input type="file" class="form-control @error('image') is-invalid  @enderror" name="image"  >
+        @error('image')
+            <span class="text-red">{{$message}}</span> </br>
+        @enderror
     </div>
 
     @error('description')

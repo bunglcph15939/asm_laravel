@@ -18,11 +18,16 @@ class LoginController extends Controller
     }
 
     function login(LoginRequest $request){
-
+        $user= User::where('email',$request->email)->first();
         $email=$request->email;
         $password=$request->password;
-
-       if(Auth::attempt(
+        if($user){
+        if($user->status==0){
+            return redirect()->back()
+            ->withInput()
+            ->with('error','Tài khoản chưa được kích hoạt');
+        }
+       else if(Auth::attempt(
        [
        'email'=>$email,
        'password'=>$password
@@ -31,13 +36,18 @@ class LoginController extends Controller
         if(Auth::user()->role==1){
             return redirect()->route('admin.index');
         }
-        else{
+        else if(Auth::user()->role==0){
             return redirect()->route('store.hien');
         }
 
        }else{
-            return redirect()->route('dangnhap.getlogin')->with('error', 'Lỗi Login');
+            return redirect()->route('dangnhap.getlogin')->with('error', 'Tài khoản hoặc mật khẩu không chính xác');
        }
+    }
+    else{
+        return redirect()->back()->with('error','Tài khoản chưa được đăng kí');
+    }
+
     }
     public function logout(Request $request){
         Auth::logout();

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\image;
+use App\Models\Comment;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Requests\ProductRequest;
@@ -49,15 +50,29 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ProductRequest $request)
+    public function store(Request $request)
 
     {
 
 
+
+
         // dd($request);
         $product = new Product();
+
         $product->fill($request->all());
+
         $product->save();
+        $image= new Image();
+        if($request->hasFile('image')){
+            $avarta=$request->image;
+            $avartaName=$avarta->hashName();
+            $avarta->storeAs('images/product',$avartaName);
+            $image->name=$avartaName;
+        }
+        $proNew=Product::max('id');
+        $image->id_product=$proNew;
+        $image->save();
         return redirect()->route('admin.show');
     }
 
@@ -70,7 +85,7 @@ class ProductController extends Controller
     public function show(Product $product)
     {
 
-        $category=category::select('id','name')->get();
+        $category=category::select('*')->get();
 
         return view('admin.add_new.form_product',[
             'product'=>$product,
@@ -131,7 +146,7 @@ class ProductController extends Controller
         ]);
     }
     public function hien(){
-        $product=Product::select('id','name','price','description','color','size','category_id')
+        $product=Product::select('*')
         ->with('images')
          ->paginate(9);
 
@@ -161,16 +176,26 @@ class ProductController extends Controller
 
         $product=Product::select('id','name','price','description','color','size','category_id')
         ->where('id','=',$id)
-        ->with('category')
-         ->get();
+        ->with(['category','images','Comments'])
+         ->first();
 
-         $image=Image::select('id','name','id_product')
-        ->where('id_product','=',$id)
 
-        ->get();
         return view('cuahang.product_detail',[
             'product'=>$product,
-            'image'=>$image
+
+        ]);
+    }
+    public function loc_size($size){
+
+        $loc_size=Product::select('*')
+        ->where('size',$size)
+        ->get();
+
+        $category=Category::select('id','name')
+            ->get();
+        return view('cuahang.category',[
+            'loc_size'=>$loc_size,
+            'category'=>$category
         ]);
     }
 }
