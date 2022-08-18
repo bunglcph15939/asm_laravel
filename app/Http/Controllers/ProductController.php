@@ -53,15 +53,8 @@ class ProductController extends Controller
     public function store(Request $request)
 
     {
-
-
-
-
-        // dd($request);
         $product = new Product();
-
         $product->fill($request->all());
-
         $product->save();
         $image= new Image();
         if($request->hasFile('image')){

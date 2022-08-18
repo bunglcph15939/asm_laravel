@@ -13,6 +13,9 @@
         </thead>
         <tbody>
            @foreach ($category as $item)
+           @if ($item->id>0)
+
+
            <tr>
             <td scope="row">{{$item->id}}</td>
             <td>{{$item->name}}</td>
@@ -30,6 +33,7 @@
                 <a href="{{route('admin.sua_cat', $item->id)}}" class="btn btn-success">Sửa</a>
             </td>
         </tr>
+        @endif
            @endforeach
 
         </tbody>

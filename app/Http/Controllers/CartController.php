@@ -11,6 +11,7 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use DB;
+use App\Http\Requests\CheckoutRequest;
 
 
 
@@ -72,12 +73,8 @@ class CartController extends Controller
                 return redirect()->back()->with('alert','Thành công');
         }
 
-        public function checkout(Request $request){
-            $validated = $request->validate([
-                'name' => 'required|max:255|min:5',
-                'phone' => 'required|max:10|min:10',
-                'address' => 'required|max:255|min:5',
-            ]);
+        public function checkout(CheckoutRequest $request){
+
             $order= new order();
              $order->name=$request->name;
              $order->phone=$request->phone;
@@ -104,64 +101,5 @@ class CartController extends Controller
         }
 
 
-    public function create()
-    {
 
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Cart  $cart
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Cart $cart)
-    {
-
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Cart  $cart
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Cart $cart)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Cart  $cart
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Cart $cart)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Cart  $cart
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Cart $cart)
-    {
-        //
-    }
 }

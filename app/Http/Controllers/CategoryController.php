@@ -44,7 +44,7 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'name' => 'required|max:255|min:5',
+            'name' => 'required|max:255|min:5|',
         ]);
 
         $category = new Category();
@@ -106,6 +106,10 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
+        $product=Product::where('category_id',$category->id)->get();
+        foreach($product as $item){
+            $item->update(['category_id'=>0]);
+        }
         $category->delete();
         return redirect()->route('admin.category');
     }

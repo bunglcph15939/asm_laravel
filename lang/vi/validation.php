@@ -137,5 +137,6 @@ return [
     'attributes' => [
         'password' => 'mật khẩu',
         'email' => 'e-mail',
+
     ],
 ];
